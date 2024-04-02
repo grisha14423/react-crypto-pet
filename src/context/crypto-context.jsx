@@ -47,3 +47,7 @@ export function CryptoContextProvider({ children }) {
 }
 
 export default CryptoContext
+
+export function useCrypto() {
+  return useContext(CryptoContext)
+}
