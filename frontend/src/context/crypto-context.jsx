@@ -21,6 +21,7 @@ export function CryptoContextProvider({ children }) {
         growPercent: percentDifference(asset.price, coin.price),
         totalAmount: asset.amount * coin.price,
         totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+        name: coin.name,
         ...asset,
       }
     })
@@ -39,8 +40,12 @@ export function CryptoContextProvider({ children }) {
     preload()
   }, [])
 
+  function addAsset(newAsset) {
+    setAssets((prev) => mapAssets([...prev, newAsset], crypto))
+  }
+
   return (
-    <CryptoContext.Provider value={{ loading, crypto, assets }}>
+    <CryptoContext.Provider value={{ loading, crypto, assets, addAsset }}>
       {children}
     </CryptoContext.Provider>
   )
